@@ -34,22 +34,16 @@ L.control.layers(baseMaps).addTo(map);
 // streets.addTo(map);
 
 // Accessing the airport GeoJSON URL
-let torontoHoods = "https://raw.githubusercontent.com/corypeacock/mapping_earthquakes/mapping_geojson_linestrings/mapping_geojson_linestrings/static/data/torontoRoutes.json";
+let torontoHoods = "https://raw.githubusercontent.com/corypeacock/mapping_earthquakes/mapping_geojson_polygons/mapping_geojson_polygons/static/data/torontoNeighborhoods.json";
  
 // Grabbing our GeoJSON data
-let myStyle = {
-    color: "#ffffa1",
-    weight: 2
-}
+// let myStyle = {
+//     color: "#ffffa1",
+//     weight: 2
+// }
 
 d3.json(torontoHoods).then(function(data) {
     console.log(data);
     // creating a GeoJSON layer with the retrieved data.
-    L.geoJSON(data, {
-        style: myStyle,
-        onEachFeature: function(feature, layer) {
-            layer.bindPopup("<h3> Airline: " + feature.properties.airline + "</h3> <hr><h3> Destination: " + feature.properties.dst + "</h3>");
-        }
-    })
-    .addTo(map);
+    L.geoJSON(data).addTo(map);
 });
