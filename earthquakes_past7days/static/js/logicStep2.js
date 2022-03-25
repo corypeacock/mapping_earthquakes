@@ -37,7 +37,35 @@ L.control.layers(baseMaps).addTo(map);
 let eq_past7days = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
  
 d3.json(eq_past7days).then(function(data) {
-    console.log(data);
+    // function returns style data for each eq. magnitude of eq into a function to calc radius
+    function styleInfo(feature) {
+        return {
+            opacity: 1,
+            fillOpacity: 1,
+            fillColor: "#ffae42",
+            color: "#000000",
+            radius: getRadius(feature.properties.mag),
+            storke: true,
+            weight: 0.5
+        }
+    }
+    
+    // function determines radius of eq based on magnitude
+    // eq w/ mag 0 plotted w/ radius 1
+    function getRadius(magnitude) {
+        if (magnitude === 0) {
+            return 1;
+        }
+        return magnitude * 4;
+    }
+
     // creating a GeoJSON layer with the retrieved data.
-    L.geoJSON(data).addTo(map);
+    L.geoJSON(data, {
+        // turn each feature into a circleMarker on the map
+        pointToLayer: function(feature, latlng) {
+            console.log(data);
+            return L.circleMarker(latlng);
+        },
+    style: styleInfo
+    }).addTo(map);
 });
