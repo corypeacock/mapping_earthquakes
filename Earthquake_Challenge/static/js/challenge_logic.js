@@ -140,10 +140,10 @@ d3.json(majorEqJSON).then(function(data) {
   // 5. Change the color function to use three colors for the major earthquakes based on the magnitude of the earthquake.
   function getColor(magnitude) {
     if (magnitude > 6) {
-      return "#ea2c2c";
+      return "#dc143c";
     }
     if (magnitude > 5) {
-      return "#ea822c";
+      return "#ea2c2c";
     }
     // if (magnitude > 3) {
     //   return "#ee9c00";
@@ -154,8 +154,7 @@ d3.json(majorEqJSON).then(function(data) {
     // if (magnitude > 1) {
     //   return "#d4ee00";
     // }
-    return "#eecc00";
-    // old color 98ee00
+    return "#ee822c";
   }  
   
   // 6. Use the function that determines the radius of the earthquake marker based on its magnitude.
